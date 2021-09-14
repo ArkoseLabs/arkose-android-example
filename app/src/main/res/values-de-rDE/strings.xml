@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ArkoseAndroidDemo</string>
+    <string name="login">Anmeldung</string>
+    <string name="username">Nutzername</string>
+    <string name="password">Passwort</string>
+</resources>

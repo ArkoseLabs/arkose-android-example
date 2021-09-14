@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"/>
+
+        <!-- Setup the Arkose API -->
+        <script data-callback="setupEnforcement"
+                src="https://api.arkoselabs.com/v2/11111111-1111-1111-1111-111111111111/api.js" async
+                defer></script>
+
+        <script type="text/javascript">
+
+            // Setup the enforcement API
+            function setupEnforcement(arkoseEnforcement) {
+                var arkose = arkoseEnforcement.setConfig({
+                    selector: '#challenge',
+
+                    // We are using 'inline' as we want the session to be created as soon as the page loads
+                    mode: "inline",
+
+                    // These are the functions that can be called when the enforcement API is triggered
+                    onCompleted: function(response) {
+                        // When a challenge has been completed, send the response from the challenge back to the native iOS code.
+                        // The token from this data will then be used within the server-side verification API call to Arkose
+                        window.ARKOSE.onCompleted(response.token);
+                    },
+                    onReady: function(response) {
+                        window.ARKOSE.onReady("Done");
+                    },
+                    onReset: function(response) {
+                        window.ARKOSE.onReset("Done");
+                    },
+                    onHide: function(response) {
+                        window.ARKOSE.onHide("Done");
+                    },
+                    onSuppress: function(response) {
+                        window.ARKOSE.onSuppress("Done");
+                    },
+                    onShown: function(response) {
+                        window.ARKOSE.onShown("Done");
+                    }
+                });
+            }
+
+        </script>
+    </head>
+
+    <body>
+        <!-- This is the element into which the challenge will be rendered if necessary -->
+        <div id="challenge" style="width: 100%"></div>
+    </body>
+
+</html>
+
